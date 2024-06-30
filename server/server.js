@@ -19,13 +19,21 @@ app.get('/getallwords', async (req, res) => {
 
 
 app.get('/getmeanings/:word', async (req, res) => {
-  const word = req.params.word
-  const yorubaWord = await YorubaWord.find({ word })
-  if (!yorubaWord) {
-    return res.status(204).send('Word not found')
+  try {
+    const word = req.params.word
+    console.log(word);
+    // capitalize first word of word
+    const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1)
+    const yorubaWord = await YorubaWord.find({ word: capitalizedWord })
+    if (!yorubaWord) {
+      return res.status(204).send('Word not found')
+    }
+    const meaning = yorubaWord[0].meanings
+    res.send(meaning)
+  } catch {
+    res.status(201).send()
   }
-  const meaning = yorubaWord[0].meanings
-  res.send(meaning)
+  
 })
 
 

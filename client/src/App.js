@@ -16,6 +16,10 @@ function App() {
         const response = axios.get(`https://quadri-project.onrender.com/getmeanings/${inputValue}`);
         response.then((res) => {
             console.log(res.data);
+            if (res.status === 201) {
+                alert('Error with word')
+                return
+            }
             setResult(res.data);
         });
     };
