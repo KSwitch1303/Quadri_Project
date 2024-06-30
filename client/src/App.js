@@ -13,7 +13,7 @@ function App() {
 
     const handleSearch = () => {
         console.log(inputValue);
-        const response = axios.get(`http://localhost:5000/getmeanings/${inputValue}`);
+        const response = axios.get(`https://quadri-project.onrender.com/getmeanings/${inputValue}`);
         response.then((res) => {
             console.log(res.data);
             setResult(res.data);
