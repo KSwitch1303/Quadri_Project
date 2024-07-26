@@ -36,6 +36,20 @@ app.get('/getmeanings/:word', async (req, res) => {
   
 })
 
+app.post('/addword', async (req, res) => {
+  try {
+    const { word, meanings } = req.body;
+    const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1)
+    const newWord = new YorubaWord({ word: capitalizedWord, meanings });
+    console.log(newWord);
+    await newWord.save();
+    console.log('Word added successfully');
+    res.status(201).json(newWord);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 
 mongoose.connect(process.env.DB_URI)
   .then(() => app.listen(port, () => console.log(`Backend server is running`)))

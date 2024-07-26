@@ -2,10 +2,13 @@ import './App.css';
 import React, { useState } from 'react';
 
 import axios from 'axios';
+import AddWord from './modal/AddPopUp';
 
+const apiUrl = process.env.REACT_APP_API_URL || 'https://quadri-project.onrender.com';
 function App() {
     const [inputValue, setInputValue] = useState('');
     const [result, setResult] = useState([]);
+    const [trigger, setTrigger] = useState(false);
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -13,7 +16,7 @@ function App() {
 
     const handleSearch = () => {
         console.log(inputValue);
-        const response = axios.get(`https://quadri-project.onrender.com/getmeanings/${inputValue}`);
+        const response = axios.get(`${apiUrl}/getmeanings/${inputValue}`);
         response.then((res) => {
             console.log(res.data);
             if (res.status === 201) {
@@ -24,10 +27,12 @@ function App() {
         });
     };
 
+
     return (
         <div className="container">
             <div className="heading">
                 <h1>YORUBA ORTHOGRAPHY SYSTEM</h1>
+                
             </div>
             <div className="search">
                 <input 
@@ -39,6 +44,7 @@ function App() {
                 />
                 <button id="searchBtn" onClick={handleSearch}>Search</button>
             </div>
+            <button className="addBtn" onClick={() => setTrigger(true)}>Add Word</button>
            {result ? (
              <div className="result" id="result">
              {result.map((word) => (
@@ -49,6 +55,8 @@ function App() {
              ))}
          </div>
            ): null}
+
+        <AddWord trigger={trigger} setTrigger={setTrigger} />
         </div>
     );
 }

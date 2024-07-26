@@ -44,6 +44,20 @@ body{
   outline: none;
   color: #ffffff;
    border-radius: 5px;
+  cursor: pointer;
+}
+.addBtn{
+  padding: 15px 0;
+  width: 25%;
+  background-color: #55d37b;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.addBtn{
+  margin-top: 10px;
 }
 .result{
  position: relative;
