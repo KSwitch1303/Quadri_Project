@@ -9,6 +9,7 @@ function App() {
     const [inputValue, setInputValue] = useState('');
     const [result, setResult] = useState([]);
     const [trigger, setTrigger] = useState(false);
+    const [error, setError] = useState('');
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
